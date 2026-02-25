@@ -1,0 +1,76 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article>
+  <articleinfo>
+    <title>Приложение «Заметки»: краткое описание</title>
+    <author>
+      <firstname>Алина</firstname>
+      <surname>Моргун</surname>
+    </author>
+  </articleinfo>
+
+  <section>
+    <title>Описание продукта</title>
+    <para>Приложение «Заметки» предназначено для создания, хранения и структурирования текстовой информации. Система позволяет пользователю организовывать личные записи, учебные материалы и рабочие документы в удобном иерархическом виде.</para>
+    <para>Основной функционал включает создание и редактирование заметок, объединение их в книги, назначение ярлыков и выполнение быстрого поиска по содержимому. Архитектура приложения модульная, что обеспечивает расширяемость и возможность добавления новых функций.</para>
+    <para>Каждая заметка хранит метаданные: дату создания, дату изменения и статус закрепления. Книги представляют собой логические сборники заметок с возможностью изменения порядка их следования.</para>
+    <para>Модуль экспорта обеспечивает формирование документов в формате PDF, позволяя сохранять как отдельные заметки, так и целые книги. Поддерживается базовое форматирование текста, включая заголовки, списки и гиперссылки.</para>
+    <para>Система ориентирована на учебные и демонстрационные задачи, поэтому логика хранения, поиска и структурирования данных реализована в упрощённом виде, но отражает принципы построения реального программного продукта.</para>
+  </section>
+
+  <section>
+    <title>Модули проекта</title>
+    <itemizedlist>
+      <listitem><para>Модуль пользовательского интерфейса</para></listitem>
+      <listitem><para>Модуль управления заметками</para></listitem>
+      <listitem><para>Модуль управления книгами</para></listitem>
+      <listitem><para>Модуль ярлыков и категорий</para></listitem>
+      <listitem><para>Модуль полнотекстового поиска</para></listitem>
+      <listitem><para>Модуль форматирования текста</para></listitem>
+      <listitem><para>Модуль экспорта в PDF</para></listitem>
+      <listitem><para>Модуль импорта данных</para></listitem>
+      <listitem><para>Модуль хранения данных</para></listitem>
+      <listitem><para>Модуль управления проектом и настройками</para></listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Сценарии использования</title>
+
+    <section>
+      <title>Сценарий 1: Создание заметки и назначение ярлыка</title>
+      <para>Пользователь создаёт новую заметку и добавляет к ней ярлык для последующей фильтрации.</para>
+      <programlisting language="javascript">
+import { Tag } from "./src/models/tag.js";
+import { TagService } from "./src/services/tagService.js";
+
+const tagService = new TagService();
+const tag = new Tag(1, "Учёба");
+tagService.addTag(tag);
+      </programlisting>
+    </section>
+
+    <section>
+      <title>Сценарий 2: Создание книги и добавление заметки</title>
+      <para>Пользователь создаёт книгу и объединяет в ней несколько заметок.</para>
+      <programlisting language="javascript">
+import { Book } from "./src/models/book.js";
+
+const book = new Book("Конспекты");
+book.addNote({ title: "Лекция 1" });
+      </programlisting>
+    </section>
+
+    <section>
+      <title>Сценарий 3: Экспорт книги в PDF</title>
+      <para>После завершения редактирования пользователь экспортирует книгу в формат PDF.</para>
+      <programlisting language="javascript">
+import { exportBookToPDF } from "./src/services/pdfExportService.js";
+
+const book = { title: "Конспекты" };
+exportBookToPDF(book);
+      </programlisting>
+    </section>
+
+  </section>
+</article>
